@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://doehdoy7akkks"]
 
-[ext_resource type="PackedScene" uid="uid://dvndpmyv0sgqq" path="res://world/player/player.tscn" id="1_6xmxd"]
+[ext_resource type="PackedScene" uid="uid://2346alrvcbvu" path="res://world/levels/level_01_welcome.tscn" id="2_4717r"]
 [ext_resource type="PackedScene" uid="uid://bldv362jqye0c" path="res://ui/ui.tscn" id="2_tcf2h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g312j"]
@@ -15,16 +15,6 @@ background_mode = 2
 sky = SubResource("Sky_6xmxd")
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_riqys"]
-albedo_color = Color(0.44291076, 0.44291076, 0.44291073, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_bhunq"]
-material = SubResource("StandardMaterial3D_riqys")
-size = Vector3(10, 1, 10)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6xmxd"]
-data = PackedVector3Array(-5, 0.5, 5, 5, 0.5, 5, -5, -0.5, 5, 5, 0.5, 5, 5, -0.5, 5, -5, -0.5, 5, 5, 0.5, -5, -5, 0.5, -5, 5, -0.5, -5, -5, 0.5, -5, -5, -0.5, -5, 5, -0.5, -5, 5, 0.5, 5, 5, 0.5, -5, 5, -0.5, 5, 5, 0.5, -5, 5, -0.5, -5, 5, -0.5, 5, -5, 0.5, -5, -5, 0.5, 5, -5, -0.5, -5, -5, 0.5, 5, -5, -0.5, 5, -5, -0.5, -5, 5, 0.5, 5, -5, 0.5, 5, 5, 0.5, -5, -5, 0.5, 5, -5, 0.5, -5, 5, 0.5, -5, -5, -0.5, 5, 5, -0.5, 5, -5, -0.5, -5, 5, -0.5, 5, 5, -0.5, -5, -5, -0.5, -5)
-
 [node name="World" type="Node3D" unique_id=976104017]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1410857975]
@@ -34,15 +24,6 @@ environment = SubResource("Environment_tcf2h")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Ground" type="MeshInstance3D" parent="." unique_id=1139039071]
-mesh = SubResource("BoxMesh_bhunq")
-
-[node name="Player" parent="." unique_id=446729297 instance=ExtResource("1_6xmxd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1752212218]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1608916331]
-shape = SubResource("ConcavePolygonShape3D_6xmxd")
-
 [node name="UI" parent="." unique_id=802042126 instance=ExtResource("2_tcf2h")]
+
+[node name="Level-01-Welcome" parent="." unique_id=2126584026 instance=ExtResource("2_4717r")]

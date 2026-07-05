@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://nvj1d4d2lca6"]
+
+[ext_resource type="MeshLibrary" uid="uid://bp84sj6pykwsw" path="res://assets/mesh_libs/dungeon_walls-tiles.meshlib" id="1_mo852"]
+[ext_resource type="Script" uid="uid://bs7o1ynq37hct" path="res://world/rooms/base_room.gd" id="1_s3ovv"]
+[ext_resource type="MeshLibrary" uid="uid://dqca0cxbru3ib" path="res://assets/mesh_libs/cieling-tiles.meshlib" id="2_xnpm8"]
+
+[node name="BaseRoom" type="Node3D" unique_id=1153078573]
+script = ExtResource("1_s3ovv")
+
+[node name="Floors" type="GridMap" parent="." unique_id=2129242055]
+mesh_library = ExtResource("1_mo852")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+
+[node name="Ceilings" type="GridMap" parent="." unique_id=134553529]
+mesh_library = ExtResource("2_xnpm8")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b11q3tdei8jho"]
+
+[ext_resource type="PackedScene" uid="uid://du1es7ff112ag" path="res://assets/meshes/walls/dungeon-walls-tiles.glb" id="1_aovrl"]
+
+[node name="dungeon-walls-tiles" unique_id=1165164044 instance=ExtResource("1_aovrl")]
