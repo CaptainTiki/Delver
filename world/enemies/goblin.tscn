@@ -18,7 +18,7 @@ shape = SubResource("CapsuleShape3D_uflcg")
 
 [node name="player" parent="." unique_id=286424852 instance=ExtResource("1_5beip")]
 
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 1312040965) index="0" unique_id=1257234617]
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 1890739963) index="0" unique_id=140898448]
 bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
 bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
 bones/1/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
@@ -35,10 +35,21 @@ bones/13/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
 bones/14/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734)
 bones/14/scale = Vector3(1, 0.9999999, 1.0000002)
 
-[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=1831326433]
+[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=1623879793]
 surface_material_override/0 = SubResource("StandardMaterial3D_wypsn")
 
-[node name="AnimationPlayer" parent="player" index="1" unique_id=228378701]
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=671621626]
+transform = Transform3D(0.46056667, -0.27990794, 0.8423361, -0.2890421, 0.8499593, 0.44048172, -0.83924574, -0.44634145, 0.31055778, 0.5156247, 0.9342039, -0.3525089)
+bone_name = "LowerArm.R_leaf"
+bone_idx = 5
+
+[node name="WeaponHolder" parent="player/Armature/Skeleton3D/BoneAttachment3D" index="0"]
+transform = Transform3D(0.942243, -0.09589279, -0.32091212, -0.301094, 0.17716484, -0.9369929, 0.14670448, 0.9794991, 0.13805956, 0, 0, 0)
+
+[node name="sword" parent="player/Armature/Skeleton3D/BoneAttachment3D/WeaponHolder" index="0" unique_id=1820354594]
+transform = Transform3D(1, -2.9802322e-08, 0, 0, 1, -1.4901161e-08, -2.9802322e-08, 0, 1, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="player" index="1" unique_id=578184708]
 autoplay = &"idle"
 
 [editable path="player"]
