@@ -16,8 +16,28 @@ shape = SubResource("CapsuleShape3D_bhunq")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=819406693]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.24966335)
 current = true
 near = 0.001
 
-[node name="player" parent="." unique_id=43292965 instance=ExtResource("2_bvkkv")]
+[node name="player" parent="." unique_id=1460535810 instance=ExtResource("2_bvkkv")]
+
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 1616663126) index="0" unique_id=831545774]
+bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
+bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
+bones/1/rotation = Quaternion(-0.036084704, 0, 0, 0.9993488)
+bones/3/rotation = Quaternion(-0.019893464, 0.20573175, -0.86033744, 0.46593806)
+bones/4/rotation = Quaternion(-0.39723587, 0.085559845, -0.1282234, 0.90467787)
+bones/6/rotation = Quaternion(0.98796076, 0.106571674, 0.038964476, -0.10515607)
+bones/6/scale = Vector3(0.9999996, 1, 0.99999815)
+bones/7/rotation = Quaternion(-0.15822285, -0.014258323, 0.13393755, 0.9781734)
+bones/7/scale = Vector3(0.99999994, 0.99999976, 1.0000001)
+bones/9/rotation = Quaternion(-0.24470738, -0.25190008, 0.73432577, 0.5808877)
+bones/10/rotation = Quaternion(-0.6438617, 0.12206772, 0.0727561, 0.75182986)
+bones/12/rotation = Quaternion(0.9876173, -0.107129514, -0.046507094, -0.10474932)
+bones/12/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
+bones/13/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734)
+bones/13/scale = Vector3(1, 0.9999999, 1.0000002)
+bones/15/position = Vector3(0.14673765, 0.50969213, -0.4525729)
+
+[editable path="player"]

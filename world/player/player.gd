@@ -13,6 +13,7 @@ class_name Player
 
 
 @onready var camera: Camera3D = %Camera3D
+@onready var animation_player: AnimationPlayer = $player/AnimationPlayer
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -47,6 +48,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, desired_velocity.x, acceleration * delta)
 		velocity.z = move_toward(velocity.z, desired_velocity.z, acceleration * delta)
+	
+	var horizontal_velocity : Vector3 = Vector3(velocity.x, 0, velocity.z)
+	if horizontal_velocity.length_squared() > 0.1 and is_on_floor():
+		animation_player.play("run")
+	else:
+		animation_player.play("idle")
 	
 	move_and_slide()
 
