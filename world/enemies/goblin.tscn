@@ -1,28 +1,24 @@
-[gd_scene format=3 uid="uid://dvndpmyv0sgqq"]
+[gd_scene format=3 uid="uid://r3q6w08ijq67"]
 
-[ext_resource type="Script" uid="uid://40obkrkepebd" path="res://world/player/player.gd" id="1_yynsy"]
-[ext_resource type="PackedScene" uid="uid://y0i7lfbdwq0a" path="res://assets/meshes/characters/player.glb" id="2_bvkkv"]
+[ext_resource type="PackedScene" uid="uid://y0i7lfbdwq0a" path="res://assets/meshes/characters/player.glb" id="1_5beip"]
+[ext_resource type="Texture2D" uid="uid://b05mswapiil75" path="res://assets/textures/skin_goblin.png" id="2_ah1ln"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhunq"]
-margin = 0.3
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uflcg"]
 height = 1.7
 
-[node name="Player" type="CharacterBody3D" unique_id=446729297]
-script = ExtResource("1_yynsy")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wypsn"]
+albedo_texture = ExtResource("2_ah1ln")
+texture_filter = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=743033248]
+[node name="Goblin" type="CharacterBody3D" unique_id=1003898964]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1394332205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
-shape = SubResource("CapsuleShape3D_bhunq")
+shape = SubResource("CapsuleShape3D_uflcg")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=819406693]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.24966335)
-current = true
-near = 0.001
+[node name="player" parent="." unique_id=286424852 instance=ExtResource("1_5beip")]
 
-[node name="player" parent="." unique_id=1460535810 instance=ExtResource("2_bvkkv")]
-
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 1312040965) index="0" unique_id=1257234617]
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 1312040965) index="0" unique_id=1257234617]
 bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
 bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
 bones/1/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
@@ -38,6 +34,9 @@ bones/13/rotation = Quaternion(0.9876173, -0.107129514, -0.046507094, -0.1047493
 bones/13/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
 bones/14/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734)
 bones/14/scale = Vector3(1, 0.9999999, 1.0000002)
+
+[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=1831326433]
+surface_material_override/0 = SubResource("StandardMaterial3D_wypsn")
 
 [node name="AnimationPlayer" parent="player" index="1" unique_id=228378701]
 autoplay = &"idle"
