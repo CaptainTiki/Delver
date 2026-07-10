@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dcdd2kn8n007y"]
+
+[ext_resource type="Script" uid="uid://g7lgeqpr1244" path="res://world/equipment/equipped_item.gd" id="1_qmwin"]
+
+[node name="EquippedItem" type="Node3D" unique_id=439482149]
+script = ExtResource("1_qmwin")

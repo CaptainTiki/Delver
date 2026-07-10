@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bdioyyikgud0h"]
+
+[ext_resource type="PackedScene" uid="uid://cq7mnmwtiwg2j" path="res://assets/meshes/gear/sword.glb" id="1_ff0qn"]
+[ext_resource type="Script" uid="uid://dxy3wux3iqsiq" path="res://data/weapon_data.gd" id="1_i8ry7"]
+
+[resource]
+script = ExtResource("1_i8ry7")
+name = "Sword"
+condition = 30
+max_condition = 30
+damage_min = 3
+damage_max = 5
+reach = 5.0
+throw_rotation_speed = 40.0
+throw_movement_speed = 10.0
+glb_mesh = ExtResource("1_ff0qn")
+metadata/_custom_type_script = "uid://dxy3wux3iqsiq"

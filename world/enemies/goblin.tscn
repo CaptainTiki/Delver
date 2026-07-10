@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://y0i7lfbdwq0a" path="res://assets/meshes/characters/player.glb" id="1_5beip"]
 [ext_resource type="Texture2D" uid="uid://b05mswapiil75" path="res://assets/textures/skin_goblin.png" id="2_ah1ln"]
+[ext_resource type="PackedScene" uid="uid://cvg22rf46ojfx" path="res://assets/meshes/gear/axe.glb" id="3_gxvx4"]
+[ext_resource type="PackedScene" uid="uid://cq7mnmwtiwg2j" path="res://assets/meshes/gear/sword.glb" id="4_ccp5d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uflcg"]
 height = 1.7
@@ -18,7 +20,7 @@ shape = SubResource("CapsuleShape3D_uflcg")
 
 [node name="player" parent="." unique_id=286424852 instance=ExtResource("1_5beip")]
 
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 1890739963) index="0" unique_id=140898448]
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 1312040965) index="0" unique_id=1257234617]
 bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
 bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
 bones/1/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
@@ -35,21 +37,25 @@ bones/13/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
 bones/14/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734)
 bones/14/scale = Vector3(1, 0.9999999, 1.0000002)
 
-[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=1623879793]
+[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=1831326433]
 surface_material_override/0 = SubResource("StandardMaterial3D_wypsn")
 
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=671621626]
-transform = Transform3D(0.46056667, -0.27990794, 0.8423361, -0.2890421, 0.8499593, 0.44048172, -0.83924574, -0.44634145, 0.31055778, 0.5156247, 0.9342039, -0.3525089)
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=1578651388]
+transform = Transform3D(0.5979774, -0.50138056, 0.6253326, -0.2568562, 0.61917067, 0.74206, -0.759242, -0.6043552, 0.24146727, 0.5307236, 0.9342039, -0.37938264)
 bone_name = "LowerArm.R_leaf"
 bone_idx = 5
 
-[node name="WeaponHolder" parent="player/Armature/Skeleton3D/BoneAttachment3D" index="0"]
-transform = Transform3D(0.942243, -0.09589279, -0.32091212, -0.301094, 0.17716484, -0.9369929, 0.14670448, 0.9794991, 0.13805956, 0, 0, 0)
+[node name="Node3D" type="Node3D" parent="player/Armature/Skeleton3D/BoneAttachment3D" unique_id=829935561]
+transform = Transform3D(0.6375645, 0.75717956, 0.14209682, 0.37457642, -0.14349583, -0.9160252, -0.67320526, 0.63725084, -0.37510952, -0.05860576, -0.015156865, 0.043889582)
 
-[node name="sword" parent="player/Armature/Skeleton3D/BoneAttachment3D/WeaponHolder" index="0" unique_id=1820354594]
+[node name="axe" parent="player/Armature/Skeleton3D/BoneAttachment3D/Node3D" unique_id=1139082649 instance=ExtResource("3_gxvx4")]
 transform = Transform3D(1, -2.9802322e-08, 0, 0, 1, -1.4901161e-08, -2.9802322e-08, 0, 1, 0, 0, 0)
 
-[node name="AnimationPlayer" parent="player" index="1" unique_id=578184708]
+[node name="sword" parent="player/Armature/Skeleton3D/BoneAttachment3D/Node3D" unique_id=1808101563 instance=ExtResource("4_ccp5d")]
+transform = Transform3D(1, -2.9802322e-08, -1.4901161e-08, 0, 1, -1.4901161e-08, -4.4703484e-08, 0, 1, 0, 0, 0)
+visible = false
+
+[node name="AnimationPlayer" parent="player" index="1" unique_id=228378701]
 autoplay = &"idle"
 
 [editable path="player"]
