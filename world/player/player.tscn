@@ -13,6 +13,7 @@ height = 1.7
 albedo_texture = ExtResource("4_40qjc")
 texture_filter = 2
 use_z_clip_scale = true
+z_clip_scale = 0.9
 
 [node name="Player" type="CharacterBody3D" unique_id=446729297]
 script = ExtResource("1_yynsy")
@@ -47,7 +48,7 @@ bones/14/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734
 bones/14/scale = Vector3(1, 0.9999999, 1.0000002)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=18058484]
-transform = Transform3D(0.15794978, -0.24595094, 0.9563266, -0.32806063, 0.90040135, 0.28575158, -0.93135864, -0.35886726, 0.06153145, 0.51811135, 0.95114833, -0.3480473)
+transform = Transform3D(0.5979774, -0.50138056, 0.6253326, -0.2568562, 0.61917067, 0.74206, -0.759242, -0.6043552, 0.24146727, 0.5307236, 0.9342039, -0.37938264)
 bone_name = "LowerArm.R_leaf"
 bone_idx = 5
 
