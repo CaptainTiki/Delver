@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bd0ug56xm3ry7"]
+
+[ext_resource type="Script" uid="uid://dbt8pvofano0q" path="res://world/equipment/thrown_item.gd" id="1_5rr23"]
+
+[node name="ThrownItem" type="RigidBody3D" unique_id=808972404]
+collision_layer = 16
+collision_mask = 5
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_5rr23")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=611262297]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]

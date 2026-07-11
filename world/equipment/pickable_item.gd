@@ -5,7 +5,7 @@ const HIGHLIGHT_MATERIAL := preload("uid://chmg3bhl6s2xn")
 
 @export var weapon_data: WeaponData
 
-@onready var collision_shape: CollisionShape3D = $CollisionShape
+@onready var collision_shape: CollisionShape3D = %CollisionShape
 
 var highlight_material: StandardMaterial3D
 var mesh_node : MeshInstance3D
