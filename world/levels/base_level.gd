@@ -3,7 +3,7 @@ class_name BaseLevel
 
 @onready var player_spawn: Node3D = $PlayerSpawn
 
-const PLAYER_PREFAB : PackedScene = preload("res://world/player/player.tscn")
+const PLAYER_PREFAB : PackedScene = preload("uid://dvndpmyv0sgqq")
 
 func _ready() -> void:
 	var player: Player = PLAYER_PREFAB.instantiate()

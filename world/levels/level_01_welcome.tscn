@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dttu83feya0yg" path="res://world/levels/base_level.tscn" id="1_rwn06"]
 [ext_resource type="PackedScene" uid="uid://dmiwswnkrvbf5" path="res://world/rooms/entrance.tscn" id="2_t81iv"]
 [ext_resource type="PackedScene" uid="uid://bx702udefjguy" path="res://world/rooms/foyer.tscn" id="3_f0oo7"]
+[ext_resource type="PackedScene" uid="uid://bosbcx0tmdb2c" path="res://world/equipment/pickable_item.tscn" id="4_t81iv"]
+[ext_resource type="Resource" uid="uid://bdioyyikgud0h" path="res://data/weapons/sword.tres" id="5_f0oo7"]
 
 [node name="Level-01-Welcome" unique_id=2126584026 instance=ExtResource("1_rwn06")]
 
@@ -13,3 +15,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 0
 
 [node name="PlayerSpawn" parent="." index="1" unique_id=1335227907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 12)
+
+[node name="PickableItem" parent="." index="2" unique_id=520057391 instance=ExtResource("4_t81iv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28217936, 0)
+weapon_data = ExtResource("5_f0oo7")

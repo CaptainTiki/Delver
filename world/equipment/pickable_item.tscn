@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bosbcx0tmdb2c"]
+
+[ext_resource type="Script" uid="uid://cchjr4xd52vtx" path="res://world/equipment/pickable_item.gd" id="1_3mitk"]
+
+[node name="PickableItem" type="Area3D" unique_id=520057391]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_3mitk")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=702080289]
+debug_color = Color(0.76752585, 0.10823672, 0.05419846, 0.41960785)

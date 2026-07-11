@@ -14,6 +14,8 @@ class_name Player
 
 @onready var camera: Camera3D = %Camera3D
 @onready var animation_player: AnimationPlayer = $player/AnimationPlayer
+@onready var select_raycast: RayCast3D = %SelectRaycast
+@onready var equipment: EquipmentComponent = %EquipmentComponent
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -22,6 +24,7 @@ const MAX_ANGLE_LOOK_UP := deg_to_rad(70)
 const MAX_ANGLE_LOOK_DOWN := deg_to_rad(-70)
 
 var input_dir : Vector2 = Vector2.ZERO
+var current_pickable_focused_item : PickableItem = null
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -34,6 +37,9 @@ func _input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("strafe_left", "strafe_right", "backward", "forward")
+	
+	if Input.is_action_just_pressed("use") and can_pickup_object():
+		pickup_object()
 
 func _physics_process(delta: float) -> void:
 	check_jump_input()
@@ -56,6 +62,7 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("idle")
 	
 	move_and_slide()
+	check_for_selection()
 
 
 func check_jump_input() -> void:
@@ -65,3 +72,25 @@ func check_jump_input() -> void:
 func process_gravity() -> void:
 	if not is_on_floor():
 		velocity.y -= gravity
+
+func check_for_selection() -> void:
+	var target_node: Node = null
+	if select_raycast.is_colliding():
+		var collider := select_raycast.get_collider()
+		if collider is PickableItem:
+			target_node = collider
+	if target_node != current_pickable_focused_item:
+		if current_pickable_focused_item:
+			current_pickable_focused_item.unhighlight()
+		current_pickable_focused_item = target_node
+		if current_pickable_focused_item is PickableItem:
+			current_pickable_focused_item.highlight()
+
+func can_pickup_object() -> bool:
+	return current_pickable_focused_item != null
+
+func pickup_object() -> void:
+	var pickable_object := current_pickable_focused_item
+	if pickable_object.weapon_data != null:
+		equipment.equip_weapon(pickable_object.weapon_data, pickable_object.global_transform)
+		pickable_object.queue_free()
