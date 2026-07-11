@@ -29,5 +29,5 @@ func _on_sleeping_state_changed() -> void:
 	var pickable_item := PICKABLE_ITEM_PREFAB.instantiate()
 	pickable_item.weapon_data = weapon_data
 	pickable_item.global_transform = global_transform
-	get_parent().add_child(pickable_item)
+	GameState.current_level.add_child(pickable_item)
 	queue_free()

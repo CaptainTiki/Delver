@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://doehdoy7akkks"]
 
-[ext_resource type="PackedScene" uid="uid://2346alrvcbvu" path="res://world/levels/level_01_welcome.tscn" id="2_4717r"]
+[ext_resource type="Script" uid="uid://c2ol7r8vuff2u" path="res://world/world.gd" id="1_h5o24"]
 [ext_resource type="PackedScene" uid="uid://bldv362jqye0c" path="res://ui/ui.tscn" id="2_tcf2h"]
-[ext_resource type="PackedScene" uid="uid://r3q6w08ijq67" path="res://world/enemies/goblin.tscn" id="3_4717r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g312j"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +16,7 @@ sky = SubResource("Sky_6xmxd")
 glow_enabled = true
 
 [node name="World" type="Node3D" unique_id=976104017]
+script = ExtResource("1_h5o24")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1410857975]
 environment = SubResource("Environment_tcf2h")
@@ -26,8 +26,3 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="UI" parent="." unique_id=802042126 instance=ExtResource("2_tcf2h")]
-
-[node name="Level-01-Welcome" parent="." unique_id=2126584026 instance=ExtResource("2_4717r")]
-
-[node name="Goblin" parent="." unique_id=1003898964 instance=ExtResource("3_4717r")]
-transform = Transform3D(0.0013343847, 0, -0.9999991, 0, 1, 0, 0.9999991, 0, 0.0013343847, -6.089204, 0.0010241866, 1.3563447)
