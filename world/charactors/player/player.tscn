@@ -32,25 +32,25 @@ collide_with_bodies = false
 
 [node name="player" parent="." unique_id=1460535810 instance=ExtResource("2_suwsv")]
 
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 1890739963) index="0" unique_id=140898448]
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 1312040965) index="0" unique_id=1257234617]
 bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
 bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
 bones/1/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
-bones/3/rotation = Quaternion(0.031311024, 0.033837643, -0.77869093, 0.6257117)
-bones/4/rotation = Quaternion(-0.14766112, 0.00040649378, -0.023529995, 0.9887581)
+bones/3/rotation = Quaternion(-0.019893464, 0.20573175, -0.86033744, 0.46593806)
+bones/4/rotation = Quaternion(-0.39723587, 0.085559845, -0.1282234, 0.90467787)
 bones/6/rotation = Quaternion(0.98796076, 0.106571674, 0.038964476, -0.10515607)
 bones/6/scale = Vector3(0.9999996, 1, 0.99999815)
 bones/7/rotation = Quaternion(-0.15822285, -0.014258323, 0.13393755, 0.9781734)
 bones/7/scale = Vector3(0.99999994, 0.99999976, 1.0000001)
-bones/10/rotation = Quaternion(0.031311024, -0.033837643, 0.77869093, 0.6257117)
-bones/11/rotation = Quaternion(-0.14766112, -0.00040649378, 0.023529995, 0.9887581)
+bones/10/rotation = Quaternion(-0.24470738, -0.25190008, 0.73432577, 0.5808877)
+bones/11/rotation = Quaternion(-0.6438617, 0.12206772, 0.0727561, 0.75182986)
 bones/13/rotation = Quaternion(0.9876173, -0.107129514, -0.046507094, -0.10474932)
 bones/13/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
 bones/14/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734)
 bones/14/scale = Vector3(1, 0.9999999, 1.0000002)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=18058484]
-transform = Transform3D(1.0000004, -1.7881393e-07, 2.4214387e-07, -2.5331974e-07, 1.6391277e-07, 1.0000001, -1.1920929e-07, -1, 1.0430813e-07, 0.77376497, 1.0212615, -0.08948312)
+transform = Transform3D(0.5979774, -0.50138056, 0.6253326, -0.2568562, 0.61917067, 0.74206, -0.759242, -0.6043552, 0.24146727, 0.5307236, 0.9342039, -0.37938264)
 bone_name = "LowerArm.R_leaf"
 bone_idx = 5
 
@@ -58,13 +58,17 @@ bone_idx = 5
 unique_name_in_owner = true
 transform = Transform3D(0.942243, -0.09589279, -0.32091212, -0.301094, 0.17716484, -0.9369929, 0.14670448, 0.9794991, 0.13805956, 0, 0, 0)
 
-[node name="AnimationPlayer" parent="player" index="1" unique_id=578184708]
+[node name="AnimationPlayer" parent="player" index="1" unique_id=228378701]
 autoplay = &"idle"
 
 [node name="Components" type="Node3D" parent="." unique_id=565997494]
 
-[node name="EquipmentComponent" parent="Components" unique_id=1379342645 node_paths=PackedStringArray("hand_slot") instance=ExtResource("3_ndik8")]
+[node name="EquipmentComponent" parent="Components" unique_id=1379342645 node_paths=PackedStringArray("hand_slot", "weapon_spawn") instance=ExtResource("3_ndik8")]
 unique_name_in_owner = true
 hand_slot = NodePath("../../player/Armature/Skeleton3D/BoneAttachment3D/RightHandSlot")
+weapon_spawn = NodePath("../../WeaponSpawn")
+
+[node name="WeaponSpawn" type="Node3D" parent="." unique_id=1020414484]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4, 1.3000001, -0.5)
 
 [editable path="player"]

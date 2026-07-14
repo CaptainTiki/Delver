@@ -7,6 +7,8 @@ class_name WeaponData
 @export var max_condition: int = -1 #negative 1 will never degrade
 @export var damage_min: int = 1
 @export var damage_max: int = 1
+@export var impale_local_translation: Vector3
+@export var impale_local_rotation: float
 @export var reach: float = 1.0
 @export var throw_rotation_speed : float = 1.0
 @export var throw_movement_speed : float = 1.0

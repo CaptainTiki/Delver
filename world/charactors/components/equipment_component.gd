@@ -6,6 +6,7 @@ const THROWN_ITEM_PREFAB := preload("uid://bd0ug56xm3ry7")
 
 @export var weapon_data: WeaponData
 @export var hand_slot : Node3D
+@export var weapon_spawn : Node3D
 
 func _ready() -> void:
 	if weapon_data != null:
@@ -35,7 +36,7 @@ func throw_weapon() -> void:
 	if has_weapon():
 		var thrown_item := THROWN_ITEM_PREFAB.instantiate()
 		thrown_item.weapon_data = weapon_data
-		thrown_item.global_transform = hand_slot.global_transform
+		thrown_item.global_transform = weapon_spawn.global_transform
 		GameState.current_level.add_child(thrown_item)
 		weapon_data = null
 		hand_slot.get_child(0).queue_free()
