@@ -21,12 +21,11 @@ func _ready() -> void:
 			gravity_scale = 0.1
 			linear_velocity = -global_basis.z * weapon_data.throw_movement_speed
 			angular_velocity = -global_basis.y * weapon_data.throw_rotation_speed
-			body_entered.connect(_on_body_entered)
 
 
 func _on_body_entered(body: Node) -> void:
 	if body is Enemy:
-		body.impale(self, global_basis)
+		body.impale(self, original_basis)
 	else:
 		gravity_scale = 1
 
