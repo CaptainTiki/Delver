@@ -32,7 +32,7 @@ collide_with_bodies = false
 
 [node name="player" parent="." unique_id=1460535810 instance=ExtResource("2_suwsv")]
 
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 1312040965) index="0" unique_id=1257234617]
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 1890739963) index="0" unique_id=140898448]
 bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
 bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
 bones/1/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
@@ -58,7 +58,7 @@ bone_idx = 5
 unique_name_in_owner = true
 transform = Transform3D(0.942243, -0.09589279, -0.32091212, -0.301094, 0.17716484, -0.9369929, 0.14670448, 0.9794991, 0.13805956, 0, 0, 0)
 
-[node name="AnimationPlayer" parent="player" index="1" unique_id=228378701]
+[node name="AnimationPlayer" parent="player" index="1" unique_id=578184708]
 autoplay = &"idle"
 
 [node name="Components" type="Node3D" parent="." unique_id=565997494]
