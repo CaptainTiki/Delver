@@ -1,9 +1,6 @@
 extends CharacterBody3D
 class_name Enemy
 
-const EQUIPPED_ITEM_PREFAB := preload("uid://dcdd2kn8n007y")
-
-const IMPALE_INTENSITY : float = 100
 const RAGDOLL_SIMULATION_TIME : float = 3.0
 
 @onready var physical_bone_torso: PhysicalBone3D = %"Physical Bone Torso"
@@ -11,15 +8,34 @@ const RAGDOLL_SIMULATION_TIME : float = 3.0
 @onready var skeleton_simulator: PhysicalBoneSimulator3D = %PhysicalBoneSimulator3D
 @onready var animation_player: AnimationPlayer = $player/AnimationPlayer
 
+enum State {MOVING, IMPALED, DYING, DEAD}
+
+var state : State
+var state_node : EnemyState
+
+func _ready() -> void:
+	switch_state(State.MOVING)
+
+func switch_state(new_state : State, data: EnemyStateData = EnemyStateData.new()) -> void:
+	if state_node != null:
+		state_node.queue_free()
+	
+	var state_map := {
+		State.MOVING: EnemyStateMoving,
+		State.IMPALED: EnemyStateImpaled
+	}
+	
+	state_node = state_map[new_state].new(self, data)
+	state_node.transition_requested.connect(switch_state)
+	state_node.name = ("State: " + str(new_state))
+	state = new_state
+	add_child(state_node)
+
 func impale(thrown_item: ThrownItem, item_basis : Basis) -> void:
-	var impaled_item := EQUIPPED_ITEM_PREFAB.instantiate() as EquippedItem
-	impaled_item.weapon_data = thrown_item.weapon_data
-	physical_bone_torso.add_child(impaled_item)
-	impaled_item.global_transform.basis = item_basis
-	impaled_item.translate_object_local(impaled_item.weapon_data.impale_local_translation)
-	impaled_item.rotate_object_local(Vector3.UP, impaled_item.weapon_data.impale_local_rotation)
-	thrown_item.queue_free()
-	register_death(item_basis * Vector3.FORWARD * IMPALE_INTENSITY + Vector3.UP * IMPALE_INTENSITY)
+	var state_data : EnemyStateData = EnemyStateData.new()
+	state_data.thrown_item = thrown_item
+	state_data.thrown_item_basis = item_basis
+	switch_state(State.IMPALED, state_data)
 
 func register_death(impulse: Vector3 = Vector3.ZERO) -> void:
 	animation_player.stop()

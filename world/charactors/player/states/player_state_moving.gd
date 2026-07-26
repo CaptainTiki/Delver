@@ -1,7 +1,7 @@
 extends PlayerState
 class_name PlayerStateMoving
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("use") and player.can_pickup_object():
 		transition_state(Player.State.PICKINGUP)
 	if Input.is_action_just_pressed("throw") and player.equipment.has_weapon():
