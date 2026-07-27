@@ -12,4 +12,5 @@ func _enter_tree() -> void:
 	impaled_item.translate_object_local(impaled_item.weapon_data.impale_local_translation)
 	impaled_item.rotate_object_local(Vector3.UP, impaled_item.weapon_data.impale_local_rotation)
 	state_data.thrown_item.queue_free()
-	enemy.register_death(state_data.thrown_item_basis * Vector3.FORWARD * IMPALE_INTENSITY + Vector3.UP * IMPALE_INTENSITY)
+	var impulse : Vector3 = state_data.thrown_item_basis * Vector3.FORWARD * IMPALE_INTENSITY + Vector3.UP * IMPALE_INTENSITY
+	transition_state(Enemy.State.DYING, EnemyStateData.new().set_impulse(impulse))

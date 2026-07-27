@@ -32,11 +32,15 @@ func animate_to_hand(equipped_item: Node3D) -> void:
 func has_weapon() -> bool:
 	return weapon_data != null and hand_slot.get_child_count() > 0
 
-func throw_weapon() -> void:
+func throw_weapon(is_being_dropped: bool = false) -> void:
 	if has_weapon():
 		var thrown_item := THROWN_ITEM_PREFAB.instantiate()
 		thrown_item.weapon_data = weapon_data
-		thrown_item.global_transform = weapon_spawn.global_transform
+		thrown_item.is_being_dropped = is_being_dropped
+		var spawn_transform := hand_slot.global_transform
+		if not is_being_dropped:
+			spawn_transform = weapon_spawn.global_transform
+		thrown_item.global_transform = spawn_transform
 		GameState.current_level.add_child(thrown_item)
 		weapon_data = null
 		hand_slot.get_child(0).queue_free()

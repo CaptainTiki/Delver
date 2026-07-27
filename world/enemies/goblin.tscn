@@ -109,12 +109,12 @@ bones/22/scale = Vector3(0.99999994, 0.99999976, 1.0000001)
 surface_material_override/0 = SubResource("StandardMaterial3D_wypsn")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=1578651388]
-transform = Transform3D(-0.99889237, -0.046410892, 0.0077527775, 0.046650987, -0.9552851, 0.2919831, -0.006145082, 0.29202136, 0.95639205, -0.13651529, 0.20785466, -0.066288546)
+transform = Transform3D(0.5979774, -0.50138056, 0.6253326, -0.25685614, 0.61917067, 0.74206, -0.75924194, -0.60435516, 0.24146721, 0.5307236, 0.9342039, -0.37938258)
 bone_name = "LowerArm.R_leaf"
-bone_idx = 5
+bone_idx = 16
 
 [node name="RightHandSlot" type="Node3D" parent="player/Armature/Skeleton3D/BoneAttachment3D" unique_id=829935561]
-transform = Transform3D(0.6375645, 0.75717956, 0.14209682, 0.37457642, -0.14349583, -0.9160252, -0.67320526, 0.63725084, -0.37510952, -0.05860576, -0.015156865, 0.043889582)
+transform = Transform3D(0.6375645, 0.75717956, 0.14209682, 0.37457642, -0.14349583, -0.9160252, -0.67320526, 0.63725084, -0.37510952, 0, 0, 0)
 
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="player/Armature/Skeleton3D" index="2" unique_id=2002666188]
 unique_name_in_owner = true
@@ -151,8 +151,8 @@ mass = 4.0
 linear_damp = 1.0
 angular_damp = 3.0
 bone_name = "Head"
-joint_constraints/swing_span = 39.99999
-joint_constraints/twist_span = 19.999994
+joint_constraints/swing_span = 39.999985
+joint_constraints/twist_span = 19.999992
 joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
@@ -365,8 +365,13 @@ autoplay = &"idle"
 
 [node name="Components" type="Node3D" parent="." unique_id=1923649799]
 
-[node name="EquipmentComponent" parent="Components" unique_id=1379342645 node_paths=PackedStringArray("hand_slot") instance=ExtResource("3_gxvx4")]
+[node name="EquipmentComponent" parent="Components" unique_id=1379342645 node_paths=PackedStringArray("hand_slot", "weapon_spawn") instance=ExtResource("3_gxvx4")]
+unique_name_in_owner = true
 weapon_data = ExtResource("4_ccp5d")
 hand_slot = NodePath("../../player/Armature/Skeleton3D/BoneAttachment3D/RightHandSlot")
+weapon_spawn = NodePath("../../WeaponSpawn")
+
+[node name="WeaponSpawn" type="Node3D" parent="." unique_id=1221682114]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4, 1.3000001, -0.5)
 
 [editable path="player"]
