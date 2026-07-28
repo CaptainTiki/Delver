@@ -19,7 +19,7 @@ shape = SubResource("CapsuleShape3D_bhunq")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=819406693]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.28349957)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.606948, -0.2792625)
 current = true
 near = 0.001
 
@@ -32,37 +32,17 @@ collide_with_bodies = false
 
 [node name="player" parent="." unique_id=1460535810 instance=ExtResource("2_suwsv")]
 
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 2070752388) index="0" unique_id=1249309831]
-bones/2/position = Vector3(0.14673765, 0.50969213, -0.4525729)
-bones/8/position = Vector3(0, 0.6749335, 1.5295353e-09)
-bones/8/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
-bones/9/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
-bones/11/rotation = Quaternion(-0.24470738, -0.25190008, 0.73432577, 0.5808877)
-bones/12/rotation = Quaternion(-0.6438617, 0.12206772, 0.0727561, 0.75182986)
-bones/14/rotation = Quaternion(-0.019893464, 0.20573175, -0.86033744, 0.46593806)
-bones/14/scale = Vector3(1, 1, 0.9999999)
-bones/15/rotation = Quaternion(-0.39723587, 0.085559845, -0.1282234, 0.90467787)
-bones/15/scale = Vector3(1, 0.9999999, 0.99999994)
-bones/17/rotation = Quaternion(0.9876173, -0.107129514, -0.046507094, -0.10474932)
-bones/17/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
-bones/18/rotation = Quaternion(-0.15822282, 0.0142583195, -0.13393754, 0.9781734)
-bones/18/scale = Vector3(1, 0.9999999, 1.0000002)
-bones/21/rotation = Quaternion(0.98796076, 0.106571674, 0.038964476, -0.10515607)
-bones/21/scale = Vector3(0.9999996, 1, 0.99999815)
-bones/22/rotation = Quaternion(-0.15822285, -0.014258323, 0.13393755, 0.9781734)
-bones/22/scale = Vector3(0.99999994, 0.99999976, 1.0000001)
-
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="0" unique_id=18058484]
-transform = Transform3D(0.5979774, -0.50138056, 0.6253326, -0.25685614, 0.61917067, 0.74206, -0.75924194, -0.60435516, 0.24146721, 0.5307236, 0.9342039, -0.37938258)
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1460535810, 823750538) index="1" unique_id=18058484]
+transform = Transform3D(1.0000004, -2.3841858e-07, -9.685755e-08, 1.4901161e-07, 2.2351742e-07, 1.0000001, -1.7881393e-07, -0.99999994, 1.3411045e-07, 0.773765, 1.0212617, -0.08948313)
 bone_name = "LowerArm.R_leaf"
 bone_idx = 16
 
-[node name="RightHandSlot" type="Node3D" parent="player/Armature/Skeleton3D/BoneAttachment3D" unique_id=1744545913]
+[node name="RightHandSlot" type="Node3D" parent="player/Armature/Skeleton3D/BoneAttachment3D" unique_id=1519788721]
+transform = Transform3D(0.6375645, 0.75717956, 0.14209682, 0.37457642, -0.14349583, -0.9160252, -0.67320526, 0.63725084, -0.37510952, 0, 0, 0)
+
+[node name="player_Armature_Skeleton3D_BoneAttachment3D#RightHandSlot" type="Node3D" parent="." unique_id=1744545913]
 unique_name_in_owner = true
 transform = Transform3D(0.942243, -0.09589279, -0.32091212, -0.301094, 0.17716484, -0.9369929, 0.14670448, 0.9794991, 0.13805956, 0, 0, 0)
-
-[node name="AnimationPlayer" parent="player" index="1" unique_id=2071018701]
-autoplay = &"idle"
 
 [node name="Components" type="Node3D" parent="." unique_id=565997494]
 
@@ -78,5 +58,10 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3336284, 0)
 light_energy = 0.25
 omni_attenuation = 0.75
+
+[node name="WeaponReachRaycast" type="RayCast3D" parent="." unique_id=2074658384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
 
 [editable path="player"]

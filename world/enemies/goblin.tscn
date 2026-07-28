@@ -61,10 +61,14 @@ height = 0.37170756
 radius = 0.021061622
 height = 0.21061622
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhunq"]
+radius = 2.5
+
 [node name="Goblin" type="CharacterBody3D" unique_id=1003898964]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_ccp5d")
+duration_between_attacks = 5.0
 
 [node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=1394332205]
 unique_name_in_owner = true
@@ -73,7 +77,7 @@ shape = SubResource("CapsuleShape3D_uflcg")
 
 [node name="player" parent="." unique_id=286424852 instance=ExtResource("1_5beip")]
 
-[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 2070752388) index="0" unique_id=1249309831]
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(286424852, 2015221909) index="0" unique_id=823750538]
 bones/0/position = Vector3(0, 0.6749335, 1.5295353e-09)
 bones/0/rotation = Quaternion(-0.0128317, 0, 0, 0.9999177)
 bones/1/rotation = Quaternion(-0.0014723944, 0, 0, 0.9999989)
@@ -105,7 +109,7 @@ bones/21/scale = Vector3(0.9999996, 1, 0.99999815)
 bones/22/rotation = Quaternion(-0.15822285, -0.014258323, 0.13393755, 0.9781734)
 bones/22/scale = Vector3(0.99999994, 0.99999976, 1.0000001)
 
-[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=1252048319]
+[node name="Character" parent="player/Armature/Skeleton3D" index="0" unique_id=92049083]
 surface_material_override/0 = SubResource("StandardMaterial3D_wypsn")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=1578651388]
@@ -360,7 +364,7 @@ joint_constraints/angular_limit_relaxation = 1.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_o6e23")
 
-[node name="AnimationPlayer" parent="player" index="1" unique_id=2071018701]
+[node name="AnimationPlayer" parent="player" index="1" unique_id=1220766965]
 autoplay = &"idle"
 
 [node name="Components" type="Node3D" parent="." unique_id=1923649799]
@@ -373,5 +377,21 @@ weapon_spawn = NodePath("../../WeaponSpawn")
 
 [node name="WeaponSpawn" type="Node3D" parent="." unique_id=1221682114]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4, 1.3000001, -0.5)
+
+[node name="PlayerDetectionArea" type="Area3D" parent="." unique_id=2024246059]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1144294255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2032974, 0)
+shape = SubResource("SphereShape3D_bhunq")
+
+[node name="WeaponReachRaycast" type="RayCast3D" parent="." unique_id=451820823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="on_player_detected"]
 
 [editable path="player"]

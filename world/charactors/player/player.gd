@@ -23,7 +23,7 @@ const JUMP_VELOCITY = 4.5
 const MAX_ANGLE_LOOK_UP := deg_to_rad(70)
 const MAX_ANGLE_LOOK_DOWN := deg_to_rad(-70)
 
-enum State {MOVING, PICKINGUP, THROWING}
+enum State {MOVING, PICKINGUP, THROWING, SLASHING}
 
 var state_node : PlayerState
 var state : State
@@ -67,6 +67,7 @@ func switch_state(new_state : State) -> void:
 	var state_map := {
 		State.MOVING: PlayerStateMoving,
 		State.PICKINGUP: PlayerStatePickingUp,
+		State.SLASHING: PlayerStateSlashing,
 		State.THROWING: PlayerStateThrowing,
 	}
 	
