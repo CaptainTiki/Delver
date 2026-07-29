@@ -1,6 +1,8 @@
 extends Resource
 class_name EnemyStateData
 
+var damage: float
+var impact_direction : Vector3
 var thrown_item: ThrownItem
 var thrown_item_basis: Basis
 var impulse: Vector3
@@ -16,4 +18,12 @@ func set_thrown_item_basis(basis: Basis) -> EnemyStateData:
 
 func set_impulse(source: Vector3) -> EnemyStateData:
 	impulse = source
+	return self
+
+func set_damage(dmg: float) -> EnemyStateData:
+	damage = dmg
+	return self
+
+func set_impact_direction(direction: Vector3) -> EnemyStateData:
+	impact_direction = direction
 	return self

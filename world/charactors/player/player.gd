@@ -16,6 +16,8 @@ class_name Player
 @onready var animation_player: AnimationPlayer = $player/AnimationPlayer
 @onready var select_raycast: RayCast3D = %SelectRaycast
 @onready var equipment: EquipmentComponent = %EquipmentComponent
+@onready var weapon_reach_raycast: RayCast3D = %WeaponReachRaycast
+@onready var health: HealthComponent = %HealthComponent
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5

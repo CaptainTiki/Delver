@@ -7,6 +7,7 @@ const THROWN_ITEM_PREFAB := preload("uid://bd0ug56xm3ry7")
 @export var weapon_data: WeaponData
 @export var hand_slot : Node3D
 @export var weapon_spawn : Node3D
+@export var weapon_reach_raycast : RayCast3D
 
 func _ready() -> void:
 	if weapon_data != null:
@@ -18,6 +19,7 @@ func equip_weapon(data: WeaponData, pickup_transform: Transform3D = Transform3D.
 	var weapon := EQUIPPED_ITEM_PREFAB.instantiate() as EquippedItem
 	weapon.weapon_data = weapon_data
 	hand_slot.add_child(weapon)
+	weapon_reach_raycast.target_position.z = -sqrt(weapon_data.reach)
 	if pickup_transform != Transform3D.IDENTITY:
 		weapon.global_transform = pickup_transform
 		animate_to_hand(weapon)

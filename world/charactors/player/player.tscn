@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://40obkrkepebd" path="res://world/charactors/player/player.gd" id="1_b0jqu"]
 [ext_resource type="PackedScene" uid="uid://y0i7lfbdwq0a" path="res://assets/meshes/characters/player.glb" id="2_suwsv"]
 [ext_resource type="PackedScene" uid="uid://cod1l1f7xmbm6" path="res://world/charactors/components/equipment_component.tscn" id="3_ndik8"]
+[ext_resource type="PackedScene" uid="uid://dosntjlf8f356" path="res://world/charactors/components/health_component.tscn" id="4_b0jqu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhunq"]
 margin = 0.3
@@ -29,11 +30,34 @@ target_position = Vector3(0, 0, -2)
 collision_mask = 8
 collide_with_areas = true
 collide_with_bodies = false
+debug_shape_custom_color = Color(0, 0, 0, 0.23529412)
 
 [node name="player" parent="." unique_id=1460535810 instance=ExtResource("2_suwsv")]
 
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1460535810, 823750538) index="1" unique_id=18058484]
-transform = Transform3D(1.0000004, -2.3841858e-07, -9.685755e-08, 1.4901161e-07, 2.2351742e-07, 1.0000001, -1.7881393e-07, -0.99999994, 1.3411045e-07, 0.773765, 1.0212617, -0.08948313)
+[node name="Skeleton3D" parent="player/Armature" parent_id_path=PackedInt32Array(1460535810, 2015221909) index="0" unique_id=823750538]
+bones/2/position = Vector3(0.14673765, 0.50969213, -0.4525729)
+bones/8/position = Vector3(0, 0.6749335, 1.5295353e-09)
+bones/8/rotation = Quaternion(-0.042675976, 0.007293211, -6.629315e-05, 0.99906236)
+bones/9/rotation = Quaternion(0.0029814767, -0.028877733, -0.0009945338, 0.999578)
+bones/11/rotation = Quaternion(-0.13276087, -0.17446218, 0.7646908, 0.6059584)
+bones/12/rotation = Quaternion(-0.7359009, 0.14528005, 0.062387, 0.6583704)
+bones/14/rotation = Quaternion(-0.4174956, 0.22489125, -0.79315484, 0.38213462)
+bones/14/scale = Vector3(1, 1, 0.9999999)
+bones/15/rotation = Quaternion(-0.33570057, -0.33419928, -0.0039907033, 0.8806817)
+bones/15/scale = Vector3(1, 0.9999999, 0.99999994)
+bones/17/rotation = Quaternion(0.9835396, -0.10766706, -0.042969283, -0.138605)
+bones/17/scale = Vector3(0.9999996, 0.9999999, 0.99999815)
+bones/18/rotation = Quaternion(-0.16378437, 0.014235401, -0.13864546, 0.976601)
+bones/18/scale = Vector3(1, 0.9999999, 1.0000002)
+bones/19/rotation = Quaternion(0.7239319, 2.5839967e-08, 0.1803746, 0.6658736)
+bones/21/rotation = Quaternion(0.9834928, 0.10946342, 0.05016655, -0.13506687)
+bones/21/scale = Vector3(0.9999996, 1, 0.99999815)
+bones/22/rotation = Quaternion(-0.16394995, -0.014234698, 0.13878565, 0.9765534)
+bones/22/scale = Vector3(0.99999994, 0.99999976, 1.0000001)
+bones/23/rotation = Quaternion(0.7239319, -2.5839967e-08, -0.1803746, 0.6658736)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="player/Armature/Skeleton3D" index="1" unique_id=18058484]
+transform = Transform3D(-0.06926718, -0.928766, -0.36413655, -0.4381477, -0.29960024, 0.84750587, -0.8962303, 0.21824998, -0.38618445, 0.2633421, 0.7480114, -0.4245503)
 bone_name = "LowerArm.R_leaf"
 bone_idx = 16
 
@@ -46,10 +70,16 @@ transform = Transform3D(0.942243, -0.09589279, -0.32091212, -0.301094, 0.1771648
 
 [node name="Components" type="Node3D" parent="." unique_id=565997494]
 
-[node name="EquipmentComponent" parent="Components" unique_id=1379342645 node_paths=PackedStringArray("hand_slot", "weapon_spawn") instance=ExtResource("3_ndik8")]
+[node name="EquipmentComponent" parent="Components" unique_id=1379342645 node_paths=PackedStringArray("hand_slot", "weapon_spawn", "weapon_reach_raycast") instance=ExtResource("3_ndik8")]
 unique_name_in_owner = true
 hand_slot = NodePath("../../player/Armature/Skeleton3D/BoneAttachment3D/RightHandSlot")
 weapon_spawn = NodePath("../../WeaponSpawn")
+weapon_reach_raycast = NodePath("../../WeaponReachRaycast")
+
+[node name="HealthComponent" parent="Components" unique_id=973266359 instance=ExtResource("4_b0jqu")]
+unique_name_in_owner = true
+max_life = 30
+current_life = 30
 
 [node name="WeaponSpawn" type="Node3D" parent="." unique_id=1020414484]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.4, 1.3000001, -0.5)
@@ -60,8 +90,9 @@ light_energy = 0.25
 omni_attenuation = 0.75
 
 [node name="WeaponReachRaycast" type="RayCast3D" parent="." unique_id=2074658384]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -2)
-collision_mask = 2
+collision_mask = 4
 
 [editable path="player"]
