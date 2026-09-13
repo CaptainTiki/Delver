@@ -15,6 +15,8 @@ func _ready() -> void:
 
 
 func equip_weapon(data: WeaponData, pickup_transform: Transform3D = Transform3D.IDENTITY) -> void:
+	if has_weapon():
+		throw_weapon(true)
 	weapon_data = data.duplicate()
 	var weapon := EQUIPPED_ITEM_PREFAB.instantiate() as EquippedItem
 	weapon.weapon_data = weapon_data
@@ -46,4 +48,3 @@ func throw_weapon(is_being_dropped: bool = false) -> void:
 		GameState.current_level.add_child(thrown_item)
 		weapon_data = null
 		hand_slot.get_child(0).queue_free()
-	

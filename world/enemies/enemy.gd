@@ -32,6 +32,7 @@ func _ready() -> void:
 
 func switch_state(new_state : State, data: EnemyStateData = EnemyStateData.new()) -> void:
 	if state_node != null:
+		state_node.process_mode = Node.PROCESS_MODE_DISABLED
 		state_node.queue_free()
 	
 	var state_map := {
@@ -54,14 +55,17 @@ func impale(thrown_item: ThrownItem, item_basis : Basis) -> void:
 	switch_state(State.IMPALED, state_data)
 
 func has_registered_player() -> bool:
-	return player != null and is_instance_valid(player)
+	return is_instance_valid(player) and not player.health.is_dead()
 
 func is_player_within_reach() -> bool:
 	if has_registered_player() and equipment.has_weapon():
-		return weapon_reach_raycast.is_colliding()
+		weapon_reach_raycast.force_raycast_update()
+		return weapon_reach_raycast.get_collider() == player
 	return false
 
 func try_receive_hit(source_player: Player, damage: float) -> void:
+	if state in [State.DYING, State.DEAD, State.IMPALED]:
+		return
 	var hit_direction := source_player.global_position.direction_to(global_position).normalized()
 	switch_state(State.HURT, EnemyStateData.new().set_damage(damage).set_impact_direction(hit_direction))
 
@@ -81,6 +85,6 @@ func process_pushback(delta: float) -> void:
 	pushback_force = pushback_force.move_toward(Vector3.ZERO, delta * FRICTION)
 	velocity += pushback_force
 
-func on_player_detected(body: Player) -> void:
-	player = body
-	print("player detected")
+func on_player_detected(body: Node3D) -> void:
+	if body is Player:
+		player = body

@@ -407,7 +407,7 @@ shape = SubResource("SphereShape3D_bhunq")
 [node name="WeaponReachRaycast" type="RayCast3D" parent="." unique_id=451820823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -2)
-collision_mask = 2
+collision_mask = 3
 
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="on_player_detected"]
 
