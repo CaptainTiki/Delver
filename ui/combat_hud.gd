@@ -3,8 +3,16 @@ extends CanvasLayer
 var health_bar: ProgressBar
 var stamina_bar: ProgressBar
 var status: Label
+var reach_hint: Label
 
 func _ready() -> void:
+	reach_hint = Label.new()
+	reach_hint.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	reach_hint.position = Vector2(-180, 30)
+	reach_hint.size = Vector2(360, 70)
+	reach_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	reach_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(reach_hint)
 	var box := VBoxContainer.new()
 	box.position = Vector2(24, 24)
 	box.custom_minimum_size.x = 310
@@ -36,6 +44,13 @@ func _process(_delta: float) -> void:
 	var player := get_tree().get_first_node_in_group("player") as Player
 	if not is_instance_valid(player):
 		return
+	var target := player.melee_target() if player.equipment.has_weapon() else null
+	reach_hint.text = "CLOSE RANGE" if target != null else ""
+	reach_hint.modulate = Color(0.4, 1.0, 0.5)
+	if player.feedback_time > 0.0:
+		reach_hint.text += "\n" + player.feedback
+	if player.health.is_dead():
+		reach_hint.text = "You died — R to retry"
 	health_bar.max_value = player.health.max_life
 	health_bar.value = player.health.current_life
 	stamina_bar.max_value = player.max_stamina

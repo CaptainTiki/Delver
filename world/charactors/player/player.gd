@@ -44,6 +44,14 @@ var dodge_direction := Vector3.ZERO
 var feedback: String = ""
 var feedback_time: float = 0.0
 
+func melee_target() -> Enemy:
+	# HUD and attack use the same chest-height query, aligned to horizontal aim.
+	weapon_reach_raycast.force_raycast_update()
+	var target := weapon_reach_raycast.get_collider() as Enemy
+	if target != null and target.state not in [Enemy.State.DYING, Enemy.State.DEAD, Enemy.State.IMPALED]:
+		return target
+	return null
+
 func spend_stamina(amount: float) -> bool:
 	if stamina < amount:
 		show_feedback("Not enough stamina")
@@ -123,7 +131,7 @@ func process_movement(delta: float) -> void:
 	if stagger_time > 0.0:
 		target_speed = 0.0
 	elif state == State.SLASHING:
-		target_speed *= 0.3
+		target_speed *= 0.9
 	elif state == State.BLOCKING:
 		target_speed *= 0.4
 	elif state != State.MOVING:

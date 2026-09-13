@@ -19,6 +19,10 @@ const FRICTION : float = 20.0
 
 enum State {MOVING, IMPALED, HURT, DYING, DEAD, SLASHING}
 
+@export var melee_reach: float = 1.2
+var combat_phase: String = ""
+var phase_label: Label3D
+
 var pushback_force : Vector3 = Vector3.ZERO
 var state : State
 var state_node : EnemyState
@@ -27,10 +31,22 @@ var time_since_last_attack : float
 
 
 func _ready() -> void:
+	weapon_reach_raycast.target_position.z = -melee_reach
+	phase_label = Label3D.new()
+	phase_label.position = Vector3(0, 2.25, 0)
+	phase_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	phase_label.font_size = 32
+	phase_label.pixel_size = 0.004
+	add_child(phase_label)
 	velocity = Vector3.ZERO
 	switch_state(State.MOVING)
 
+func _process(_delta: float) -> void:
+	phase_label.text = combat_phase
+	phase_label.modulate = Color(0.4, 1.0, 0.5) if combat_phase.begins_with("RECOVERING") else Color(1.0, 0.65, 0.2)
+
 func switch_state(new_state : State, data: EnemyStateData = EnemyStateData.new()) -> void:
+	combat_phase = ""
 	if state_node != null:
 		state_node.process_mode = Node.PROCESS_MODE_DISABLED
 		state_node.queue_free()

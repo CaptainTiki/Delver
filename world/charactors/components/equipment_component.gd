@@ -21,7 +21,7 @@ func equip_weapon(data: WeaponData, pickup_transform: Transform3D = Transform3D.
 	var weapon := EQUIPPED_ITEM_PREFAB.instantiate() as EquippedItem
 	weapon.weapon_data = weapon_data
 	hand_slot.add_child(weapon)
-	weapon_reach_raycast.target_position.z = -sqrt(weapon_data.reach)
+	weapon_reach_raycast.target_position.z = -weapon_data.reach
 	if pickup_transform != Transform3D.IDENTITY:
 		weapon.global_transform = pickup_transform
 		animate_to_hand(weapon)
