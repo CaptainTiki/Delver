@@ -1,5 +1,8 @@
 # Delver
 
+See [HANDOFF.md](HANDOFF.md) for the accepted combat baseline and laptop continuation notes.
+The development notes below are chronological; earlier values may be superseded.
+
 #game graphics inspiration: Bloodwright
 
 
@@ -58,3 +61,30 @@ it no longer claims that the center ray guarantees blade contact. The first
 spacing-playtest notes above describe the earlier range-query implementation.
 The pose and timing constants are in player_state_slashing.gd for further tuning.
 The regression scene must also print COMBO_TEST: PASS.
+
+### Combo feedback pass
+
+Follow-up clicks are accepted from 0.05 seconds into a cut through its recovery,
+with only one follow-up stored. The next attack still waits for commitment to
+finish; there is no extra input-listening pause. The sequence is slightly slower.
+Each cut now costs 15 stamina (45 for all three, down from 75), leaving room
+for defense and additional enemies. The third cut raises the hand higher,
+finishes lower, and rolls the blade 90 degrees so its edge leads the descent.
+
+Next experiment: a small forward lunge on the third cut only, with committed
+recovery that leaves the player exposed to other enemies. Not enabled yet.
+
+### Crossing-cut motion
+
+The first diagonal carries upward on the left during follow-through. A queued
+second attack cuts from upper left to lower right, making an X with the opener.
+Without a follow-up, the hand retracts toward the body before returning to ready.
+Late follow-ups start from the current recovery pose without snapping back.
+
+### Natural follow-through pass
+
+The first cut carries outward around the left shoulder and may leave the frame
+before rising into the cross cut. Small torso turns move the shoulder without
+turning the camera, and elbow bend adapts to the hand position. Arm posing uses
+body facing with partial look pitch instead of being fixed entirely to the view.
+Combo timing, input buffering, stamina costs, and active damage windows are unchanged.

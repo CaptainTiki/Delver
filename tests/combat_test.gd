@@ -103,7 +103,8 @@ func run() -> void:
 	assert(player.melee_target() == enemy, "Sword reaches the recovering goblin")
 	var enemy_before: int = enemy.health.current_life
 	player.switch_state(Player.State.SLASHING)
-	player.state_node._physics_process(0.26)
+	for sample in range(24):
+		player.state_node._physics_process(0.016)
 	assert(enemy.health.current_life < enemy_before, "Punish swing connects")
 	assert(player.health.current_life == before, "Successful spacing causes no health trade")
 	print("SPACING_TEST: PASS - bait, retreat, locked facing, recovery, damage-free punish")
@@ -119,22 +120,22 @@ func run() -> void:
 	var attack := player.state_node as PlayerStateSlashing
 	attack.queue_followup()
 	assert(not attack.queued, "Opening click cannot queue an immediate extra attack")
-	for i in range(13):
+	for i in range(4):
 		attack._physics_process(0.016)
 	attack.queue_followup()
-	assert(attack.queued, "Follow-up accepts a click near the end of commitment")
+	assert(attack.queued, "Follow-up accepts a click during early windup")
 	while attack.cut == 0:
 		attack._physics_process(0.016)
-	assert(player.stamina == 75.0, "Follow-up spends stamina once")
+	assert(player.stamina == 85.0, "Follow-up spends stamina once")
 	for i in range(12):
 		attack._physics_process(0.016)
 	attack.queue_followup()
 	while attack.cut == 1:
 		attack._physics_process(0.016)
-	assert(player.stamina == 50.0, "Third cut spends stamina once")
+	assert(player.stamina == 70.0, "Third cut spends stamina once")
 	attack.queue_followup()
 	assert(not attack.queued, "Finisher cannot queue a fourth cut")
-	for i in range(50):
+	for i in range(65):
 		if player.state != Player.State.SLASHING:
 			break
 		attack._physics_process(0.016)
@@ -143,7 +144,7 @@ func run() -> void:
 	await get_tree().process_frame
 	player.switch_state(Player.State.SLASHING)
 	attack = player.state_node
-	for i in range(40):
+	for i in range(60):
 		if player.state != Player.State.SLASHING:
 			break
 		attack._physics_process(0.016)

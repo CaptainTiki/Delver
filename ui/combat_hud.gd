@@ -3,7 +3,9 @@ extends CanvasLayer
 var health_bar: ProgressBar
 var stamina_bar: ProgressBar
 var status: Label
+var stamina_mode: Label
 var reach_hint: Label
+var combo_hint: Label
 
 func _ready() -> void:
 	reach_hint = Label.new()
@@ -13,6 +15,13 @@ func _ready() -> void:
 	reach_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	reach_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(reach_hint)
+	combo_hint = Label.new()
+	combo_hint.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	combo_hint.position = Vector2(-210, 100)
+	combo_hint.size = Vector2(420, 54)
+	combo_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	combo_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(combo_hint)
 	var box := VBoxContainer.new()
 	box.position = Vector2(24, 24)
 	box.custom_minimum_size.x = 310
@@ -22,6 +31,8 @@ func _ready() -> void:
 	box.add_child(title)
 	health_bar = make_bar(box, "Health", Color(0.75, 0.2, 0.2))
 	stamina_bar = make_bar(box, "Stamina", Color(0.25, 0.7, 0.4))
+	stamina_mode = Label.new()
+	box.add_child(stamina_mode)
 	status = Label.new()
 	box.add_child(status)
 	var controls := Label.new()
@@ -44,6 +55,11 @@ func _process(_delta: float) -> void:
 	var player := get_tree().get_first_node_in_group("player") as Player
 	if not is_instance_valid(player):
 		return
+	combo_hint.text = ""
+	if not player.health.is_dead() and player.state_node is PlayerStateSlashing:
+		var attack := player.state_node as PlayerStateSlashing
+		combo_hint.text = attack.combo_cue()
+		combo_hint.modulate = Color(0.5, 0.9, 1.0) if attack.queued else Color(1.0, 0.9, 0.65)
 	var target := player.melee_target() if player.equipment.has_weapon() else null
 	reach_hint.text = "CLOSE RANGE" if target != null else ""
 	reach_hint.modulate = Color(0.4, 1.0, 0.5)
@@ -55,6 +71,7 @@ func _process(_delta: float) -> void:
 	health_bar.value = player.health.current_life
 	stamina_bar.max_value = player.max_stamina
 	stamina_bar.value = player.stamina
+	stamina_mode.text = "UNLIMITED STAMINA · Backtick to disable" if player.unlimited_stamina else "Backtick toggles unlimited stamina"
 	if player.health.is_dead():
 		status.text = "You died — press R to retry"
 	elif player.feedback_time > 0.0:

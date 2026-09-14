@@ -34,9 +34,10 @@ var current_pickable_focused_item : PickableItem = null
 
 @export_category("Combat")
 @export var max_stamina: float = 100.0
-@export var attack_cost: float = 25.0
+@export var attack_cost: float = 15.0
 @export var dodge_cost: float = 30.0
 var stamina: float = 100.0
+var unlimited_stamina: bool = false
 var regen_delay: float = 0.0
 var stagger_time: float = 0.0
 var dodge_elapsed: float = 0.0
@@ -53,6 +54,9 @@ func melee_target() -> Enemy:
 	return null
 
 func spend_stamina(amount: float) -> bool:
+	if unlimited_stamina:
+		stamina = max_stamina
+		return true
 	if stamina < amount:
 		show_feedback("Not enough stamina")
 		return false
@@ -97,6 +101,14 @@ func _ready() -> void:
 	switch_state(Player.State.MOVING)
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_QUOTELEFT:
+		unlimited_stamina = not unlimited_stamina
+		if unlimited_stamina:
+			stamina = max_stamina
+			regen_delay = 0.0
+		show_feedback("Unlimited stamina ON" if unlimited_stamina else "Normal stamina restored")
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventMouseMotion and not health.is_dead() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity) # PI 3.14 -> 180 degrees
 		camera.rotate_x(-event.relative.y * mouse_sensitivity * mouse_invert_y)
